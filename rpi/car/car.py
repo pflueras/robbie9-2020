@@ -1,6 +1,10 @@
 from car.camera import Camera
 from car.motor import Motor
+from enum import Enum
 
+class CarStatus(Enum):
+    STOPPED='STOPPED'
+    RUNNING='RUNNING'
 
 class Car:
 
