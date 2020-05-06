@@ -4,7 +4,7 @@ from car.motor import Motor
 
 
 class Car:
-    # This car represents the Raspberry-Py car
+    """ This car represents the Raspberry-Py car """
 
     def __init__(self, m1_forward, m1_backward, m2_forward, m2_backward, m3_forward, m3_backward, m4_forward,
                  m4_backward, resolution_x, resolution_y, rotation, status=CarStatus.STOPPED):
