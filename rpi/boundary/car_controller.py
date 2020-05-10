@@ -3,20 +3,25 @@ import time
 from flask import Flask, jsonify
 
 from car.car import Car
+from service.image_analysis import ImageAnalysisService
 
 
 class CarController:
-    def __init__(self, car: Car, flask_app: Flask):
+    def __init__(self, car: Car, flask_app: Flask, image_analysis_service: ImageAnalysisService):
         self._car = car
         self._flaskApp = flask_app
+        self.image_analysis_service = image_analysis_service
         self._flaskApp.route("/status", methods=['GET'])(self.status)
+        self._flaskApp.route("/run", methods=['PUT'])(self.run)
 
     def status(self):
         return jsonify(status=str(self._car.status.name))
 
     def run(self):
         for i in range(5):
+            image_taken = 'img_' + str(i) + '.png'
+            self._car.take_picture(image_taken)
+            self.image_analysis_service.uploadImage(image_taken)
+            self.image_analysis_service.detectTrafficLight(image_taken)
             self._car.move_forward()
-            self._car.stop()
-            self._car.take_picture('img_' + str(i) + '.png')
             time.sleep(1)
