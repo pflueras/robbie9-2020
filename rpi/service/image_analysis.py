@@ -2,7 +2,7 @@ import time
 
 
 class ImageAnalysisService:
-
+def upload_image(self, image_filename: str)
     def uploadImage(self, image_filename: str):
         time.sleep(0.25)
 
