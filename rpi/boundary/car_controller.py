@@ -10,7 +10,7 @@ class CarController:
     def __init__(self, car: Car, flask_app: Flask, image_analysis_service: ImageAnalysisService):
         self._car = car
         self._flaskApp = flask_app
-        self.image_analysis_service = image_analysis_service
+        self._imageAnalysisService = image_analysis_service
         self._flaskApp.route("/status", methods=['GET'])(self.status)
         self._flaskApp.route("/run", methods=['PUT'])(self.run)
 
@@ -21,7 +21,7 @@ class CarController:
         for i in range(5):
             image_taken = 'img_' + str(i) + '.png'
             self._car.take_picture(image_taken)
-            self.image_analysis_service.uploadImage(image_taken)
-            self.image_analysis_service.detectTrafficLight(image_taken)
+            self._imageAnalysisService.uploadImage(image_taken)
+            self._imageAnalysisService.detectTrafficLight(image_taken)
             self._car.move_forward()
             time.sleep(1)

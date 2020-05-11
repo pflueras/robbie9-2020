@@ -14,6 +14,6 @@ def index():
 
 if __name__ == '__main__':
     car = Car(17, 18, 22, 23, 5, 6, 12, 13, 1920, 1080, 270)
-    image_analysis_service = ImageAnalysisService()
-    carController = CarController(car=car, flask_app=app,image_analysis_service=image_analysis_service)
+    imageAnalysisService = ImageAnalysisService()
+    carController = CarController(car=car, flask_app=app,image_analysis_service=imageAnalysisService)
     app.run()
