@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 
 from boundary.car_controller import CarController
 from car.car import Car
+from service.image_analysis import ImageAnalysisService
 
 app = Flask(__name__)
 
@@ -11,12 +12,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/status", methods=['GET'])
-def status():
-    return jsonify(status="STOPPED")
-
-
 if __name__ == '__main__':
-    # carController = CarController(car=Car(17, 18, 22, 23, 5, 6, 12, 13, 1920, 1080, 270))
-    # carController.run()
+    car = Car(17, 18, 22, 23, 5, 6, 12, 13, 1920, 1080, 270)
+    imageAnalysisService = ImageAnalysisService()
+    carController = CarController(car=car, flask_app=app,image_analysis_service=imageAnalysisService)
     app.run()
