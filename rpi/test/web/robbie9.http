@@ -3,3 +3,7 @@ GET http://localhost:5000/status
 Accept: application/json
 
 ###
+
+// Run command
+PUT http://localhost:5000/run
+Accept: application/json

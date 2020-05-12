@@ -21,7 +21,7 @@ class CarController:
         for i in range(5):
             image_taken = 'img_' + str(i) + '.png'
             self._car.take_picture(image_taken)
-            self._imageAnalysisService.uploadImage(image_taken)
-            self._imageAnalysisService.detectTrafficLight(image_taken)
+            self._imageAnalysisService.upload_image(image_taken)
+            self._imageAnalysisService.detect_traffic_light(image_taken)
             self._car.move_forward()
             time.sleep(1)
