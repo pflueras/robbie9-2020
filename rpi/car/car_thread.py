@@ -14,7 +14,7 @@ class CarThread(Thread):
 
     def run(self) -> None:
         while self._running:
-            image_taken = 'img_.png'
+            image_taken = 'img.png'
             self._car.take_picture(image_taken)
             self._imageAnalysisService.upload_image(image_taken)
             self._imageAnalysisService.detect_traffic_light(image_taken)
@@ -22,4 +22,5 @@ class CarThread(Thread):
             time.sleep(1)
         self._car.stop()
 
-
+    def stop(self):
+        self._running = False

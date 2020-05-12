@@ -16,4 +16,8 @@ class CarService:
         self._thread = CarThread(car=self._car, image_analysis_service=self._imageAnalysisService)
         self._thread.start()
 
-
+    def stop(self):
+        if self._thread:
+            self._thread.stop()
+            self._thread.join()
+            self._thread = None
