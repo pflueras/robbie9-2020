@@ -9,3 +9,9 @@ PUT http://localhost:5000/run
 Accept: application/json
 
 ###
+
+// Stop command
+POST http://localhost:5000/stop
+Accept: application/json
+
+###
