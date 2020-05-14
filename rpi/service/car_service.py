@@ -1,7 +1,7 @@
 from car.car import Car
-from car.car_thread import CarThread
+from service.car_thread import CarThread
 from service.image_analysis import ImageAnalysisService
-
+from boundary.car_event_processor import CarEventProcessor
 
 class CarService:
     def __init__(self, car: Car, image_analysis_service: ImageAnalysisService):
@@ -13,7 +13,7 @@ class CarService:
         if self._thread:
             return
 
-        self._thread = CarThread(car=self._car, image_analysis_service=self._imageAnalysisService)
+        self._thread = CarThread(car=self._car, image_analysis_service=self._imageAnalysisService, car_event_processor=CarEventProcessor(self._car))
         self._thread.start()
 
     def stop(self):
