@@ -39,7 +39,5 @@ class Car:
         self._motor3.stop()
         self._motor4.stop()
 
-    def take_picture(self, image_filename, car_event_processor):
-        self.status = CarStatus.TAKE_PICTURE
-        car_event_processor.change_status("Taking a picture", self.status)
+    def take_picture(self, image_filename):
         self._camera.take_picture(image_filename)
