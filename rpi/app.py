@@ -1,9 +1,11 @@
 from flask import Flask, render_template
 
 from boundary.car_controller import CarController
+from boundary.car_event_processor import CarEventProcessor
 from car.car import Car
 from service.car_service import CarService
 from service.image_analysis import ImageAnalysisService
+
 
 app = Flask(__name__)
 
@@ -18,4 +20,5 @@ if __name__ == '__main__':
     imageAnalysisService = ImageAnalysisService()
     carService = CarService(car=car, image_analysis_service=imageAnalysisService)
     carController = CarController(car=car, car_service=carService, flask_app=app)
+    car_event_processor = CarEventProcessor()
     app.run()
