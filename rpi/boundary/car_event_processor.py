@@ -1,11 +1,10 @@
 from pydispatch import dispatcher
-from flask_socketio import SocketIO, send
 
 from car.car_status import CarStatus
 
 
 class CarEventProcessor:
-    def __init__(self, socketio: SocketIO):
+    def __init__(self, socketio):
         dispatcher.connect(self.running, signal=CarStatus.RUNNING, sender=dispatcher.Any)
 
         dispatcher.connect(self.stopped, signal=CarStatus.STOPPED, sender=dispatcher.Any)
@@ -27,37 +26,37 @@ class CarEventProcessor:
         self._socketio = socketio
 
     def take_picture(self):
-        self._socketio.emit('take_picture', 'took picture')
+        self._socketio.send('took picture')
         print('took picture')
 
     def uploading_image(self):
-        self._socketio.emit('uploading_image', 'uploaded image')
+        self._socketio.send('uploaded image')
         print('uploaded image')
 
     def traffic_light_detected(self):
-        self._socketio.emit('traffic_light_detected', 'detected traffic light')
+        self._socketio.send('detected traffic light')
         print('detected traffic light')
 
     def traffic_light_not_present(self):
-        self._socketio.emit('traffic_light_not_present', 'traffic light not detected')
+        self._socketio.send('traffic light not detected')
         print('traffic light not detected')
 
     def move_forward(self):
-        self._socketio.emit('move_forward', 'moving forward')
+        self._socketio.send('moving forward')
         print('moving forward')
 
     def running(self):
-        self._socketio.emit('running', 'running')
+        self._socketio.send('running')
         print('running')
 
     def stopped(self):
-        self._socketio.emit('stopped', 'stopped')
+        self._socketio.send('stopped')
         print('stopped')
 
     def image_uploaded(self):
-        self._socketio.emit('image_uploaded', 'image uploaded')
+        self._socketio.send('image uploaded')
         print('image uploaded')
 
     def analyse_image(self):
-        self._socketio.emit('analyse_image', 'image analise')
+        self._socketio.send('image analise')
         print('image analise')

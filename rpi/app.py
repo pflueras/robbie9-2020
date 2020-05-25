@@ -12,6 +12,16 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 
+@socketio.on('connect')
+def connect():
+    socketio.send('Connection established')
+
+
+@socketio.on('message')
+def handle_messages(message):
+    print('Message from client: ' + message)
+
+
 @app.route('/')
 def index():
     return render_template("index.html")
