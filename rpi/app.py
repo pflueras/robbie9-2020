@@ -7,9 +7,8 @@ from car.car import Car
 from service.car_service import CarService
 from service.image_analysis import ImageAnalysisService
 
-
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, logger=True, engineio_logger=True)
 
 
 @socketio.on('connect')
@@ -20,6 +19,11 @@ def connect():
 @socketio.on('message')
 def handle_messages(message):
     print('Message from client: ' + message)
+
+
+@socketio.on('disconnect')
+def disconnect():
+    print('Client disconnected')
 
 
 @app.route('/')
