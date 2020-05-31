@@ -8,20 +8,20 @@ from service.car_service import CarService
 from service.image_analysis import ImageAnalysisService
 
 app = Flask(__name__)
-socketio = SocketIO(app, logger=True, engineio_logger=True)
+socket_io = SocketIO(app, logger=True, engineio_logger=True)
 
 
-@socketio.on('connect')
+@socket_io.on('connect')
 def connect():
-    socketio.send('Connection established')
+    socket_io.send('Connection established')
 
 
-@socketio.on('message')
+@socket_io.on('message')
 def handle_messages(message):
     print('Message from client: ' + message)
 
 
-@socketio.on('disconnect')
+@socket_io.on('disconnect')
 def disconnect():
     print('Client disconnected')
 
@@ -36,5 +36,5 @@ if __name__ == '__main__':
     imageAnalysisService = ImageAnalysisService()
     carService = CarService(car=car, image_analysis_service=imageAnalysisService)
     carController = CarController(car=car, car_service=carService, flask_app=app)
-    car_event_processor = CarEventProcessor(socketio)
-    socketio.run(app)
+    car_event_processor = CarEventProcessor(socket_io)
+    socket_io.run(app)
