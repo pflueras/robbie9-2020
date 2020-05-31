@@ -16,7 +16,6 @@ class Car:
         self._status = status
 
     def move_forward(self) -> None:
-        print('Moving the car forward...')
         self._status = CarStatus.MOVING_FORWARD
         self._motor1.move_forward()
         self._motor2.move_forward()
@@ -24,7 +23,6 @@ class Car:
         self._motor4.move_forward()
 
     def move_backward(self) -> None:
-        print('Moving the car backward...')
         self._status = CarStatus.MOVING_BACKWARD
         self._motor1.move_backward()
         self._motor2.move_backward()
@@ -32,7 +30,6 @@ class Car:
         self._motor4.move_backward()
 
     def stop(self) -> None:
-        print('Stopping the car...')
         self._status = CarStatus.STOPPED
         self._motor1.stop()
         self._motor2.stop()

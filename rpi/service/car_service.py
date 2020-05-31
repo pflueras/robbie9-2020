@@ -6,10 +6,10 @@ class CarService:
     def __init__(self, car: Car, image_analysis_service: ImageAnalysisService):
         self._car = car
         self._imageAnalysisService = image_analysis_service
-        self._thread = None
+        self._thread = CarThread(car=self._car, image_analysis_service=self._imageAnalysisService)
 
     def run(self):
-        if self._thread:
+        if self._thread.running:
             return
 
         self._thread = CarThread(car=self._car, image_analysis_service=self._imageAnalysisService)
@@ -19,4 +19,3 @@ class CarService:
         if self._thread:
             self._thread.stop()
             self._thread.join()
-            self._thread = None

@@ -14,12 +14,13 @@ class CarThread(Thread):
         super(CarThread, self).__init__()
         self._car: Car = car
         self._imageAnalysisService: ImageAnalysisService = image_analysis_service
-        self._running = True
+        self._running = False
 
     def run(self) -> None:
         max_iterations: int = 10
         current_iteration: int = 0
 
+        self._running = True
         while self._running and current_iteration < max_iterations:
             image_filename: str = 'img_' + str(current_iteration) + ".png"
 
@@ -46,6 +47,7 @@ class CarThread(Thread):
                 break
 
             current_iteration += 1
+        self._running = False
 
     def take_picture(self, image_filename):
         dispatcher.send(signal=CarStatus.TAKING_IMAGE, sender=self)
@@ -83,3 +85,7 @@ class CarThread(Thread):
 
     def stop(self):
         self._running = False
+
+    @property
+    def running(self):
+        return self._running

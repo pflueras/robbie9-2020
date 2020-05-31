@@ -11,7 +11,7 @@ $(document).ready( () => {
     });
 
     socket.on('IMAGE_TAKEN', message => {
-        console.log('IMAGE_TAKEN: ' + message);
+        console.log('IMAGE_TAKEN: ' + JSON.stringify(message));
         // $('#log').append(`<p> ${message} </p>`);
     });
 
@@ -21,7 +21,7 @@ $(document).ready( () => {
     });
 
     socket.on('IMAGE_UPLOADED', message => {
-        console.log('IMAGE_UPLOADED: ' + message);
+        console.log('IMAGE_UPLOADED: ' + JSON.stringify(message));
         // $('#log').append(`<p> ${message} </p>`);
     });
 

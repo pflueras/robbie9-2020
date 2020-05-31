@@ -5,4 +5,4 @@ class Camera:
         self._rotation = rotation
 
     def take_picture(self, image_filename):
-        print('Taking a picture. Saving picture to ' + image_filename)
+        pass
