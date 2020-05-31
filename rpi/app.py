@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_socketio import SocketIO
 
 from boundary.car_controller import CarController
 from boundary.car_event_processor import CarEventProcessor
@@ -6,8 +7,23 @@ from car.car import Car
 from service.car_service import CarService
 from service.image_analysis import ImageAnalysisService
 
-
 app = Flask(__name__)
+socketio = SocketIO(app, logger=True, engineio_logger=True)
+
+
+@socketio.on('connect')
+def connect():
+    socketio.send('Connection established')
+
+
+@socketio.on('message')
+def handle_messages(message):
+    print('Message from client: ' + message)
+
+
+@socketio.on('disconnect')
+def disconnect():
+    print('Client disconnected')
 
 
 @app.route('/')
@@ -20,5 +36,5 @@ if __name__ == '__main__':
     imageAnalysisService = ImageAnalysisService()
     carService = CarService(car=car, image_analysis_service=imageAnalysisService)
     carController = CarController(car=car, car_service=carService, flask_app=app)
-    car_event_processor = CarEventProcessor()
-    app.run()
+    car_event_processor = CarEventProcessor(socketio)
+    socketio.run(app)
