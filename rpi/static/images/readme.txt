@@ -1,0 +1,1 @@
+This folder stores images taken by Raspberry Pi Camera

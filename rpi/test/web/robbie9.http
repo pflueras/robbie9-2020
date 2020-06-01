@@ -1,17 +1,22 @@
-// Get the status of Robbie9
+# Get the status of Robbie9
 GET http://localhost:5000/status
 Accept: application/json
 
 ###
 
-// Run command
+# Run command
 PUT http://localhost:5000/run
 Accept: application/json
 
 ###
 
-// Stop command
+# Stop command
 POST http://localhost:5000/stop
 Accept: application/json
+
+###
+
+# readme.txt from images folder
+GET http://localhost:5000/static/images/readme.txt
 
 ###

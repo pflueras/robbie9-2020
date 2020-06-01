@@ -6,7 +6,7 @@ from car.car_status import CarStatus
 from service.image_analysis import ImageAnalysisService
 from service.events import Image, S3Image, TrafficLight
 
-image_uri_folder: str = '/images/'
+image_uri_folder: str = '/static/images/'
 
 
 class CarThread(Thread):
